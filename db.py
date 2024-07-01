@@ -27,3 +27,13 @@ def create_item(name, description):
     cur.close()
     conn.close()
     return item_id
+
+def execute_machine_pulse(ip, executed_at, machine_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('INSERT INTO machine_pulse (ip, executed_at, machine_id) VALUES (%s, %s, %s) RETURNING id;', (ip, executed_at, machine_id))
+    machine_pulse_id = cur.fetchone()[0]
+    conn.commit()
+    cur.close()
+    conn.close()
+    return machine_pulse_id
