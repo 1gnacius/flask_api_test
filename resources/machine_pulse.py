@@ -15,5 +15,5 @@ class MachinePulse(Resource):
         ip = args['ip']
         executed_at = args['executed_at']
         machine_id = args['machine_id']
-        machine_pulse_id = db.create_item(ip, executed_at, machine_id)
+        machine_pulse_id = db.execute_machine_pulse(ip, executed_at, machine_id)
         return {'id': machine_pulse_id}, 201
