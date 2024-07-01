@@ -18,6 +18,15 @@ def get_all_items():
     conn.close()
     return items
 
+def get_all_machine_pulses():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM machine_pulse;')
+    machine_pulses = cur.fetchall()
+    cur.close()
+    conn.close()
+    return machine_pulses
+
 def create_item(name, description):
     conn = get_db_connection()
     cur = conn.cursor()
