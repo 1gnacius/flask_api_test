@@ -17,11 +17,12 @@ class MachinePulse(Resource):
         return {'machine_pulses': machine_pulses}
 
     def post(self): 
+        print("HOLAAAAA")
         args = parser.parse_args()
         ip = args['ip']
         executed_at_timestamp = args['executed_at']
         machine_id = args['machine_id']
-        print("HOLAAAAA")
+        
         print(type(executed_at_timestamp))
         # Convertir el timestamp a objeto datetime
         executed_at = datetime.fromtimestamp(executed_at_timestamp)
