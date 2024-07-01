@@ -17,6 +17,7 @@ class MachinePulse(Resource):
         return {'machine_pulses': machine_pulses}
 
     def post(self): 
+        print("HOLAAAAA")
         args = parser.parse_args()
         ip = args['ip']
         executed_at_timestamp = args['executed_at']
