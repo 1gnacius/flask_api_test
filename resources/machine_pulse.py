@@ -20,17 +20,15 @@ class MachinePulse(Resource):
         print("HOLAAAAA")
         args = parser.parse_args()
         ip = args['ip']
-        executed_at_timestamp = args['executed_at']
+        executed_at_str = args['executed_at']
         machine_id = args['machine_id']
-        
-        print(type(executed_at_timestamp))
-        # Convertir el timestamp a objeto datetime
-        executed_at = datetime.fromtimestamp(executed_at_timestamp)
-        
-        # Convertir datetime a formato ISO 8601
-        executed_at_iso = executed_at.isoformat()
-        
+
+        executed_at_dt = datetime.strptime(executed_at_str, '%Y-%m-%dT%H:%M:%S')
+
+        # Obtener el timestamp (float) desde el objeto datetime
+        executed_at_timestamp = executed_at_dt.timestamp()
+
         # Guardar la pulsación de la máquina en la base de datos
-        machine_pulse_id = db.execute_machine_pulse(ip, executed_at_iso, machine_id)
+        machine_pulse_id = db.execute_machine_pulse(ip, executed_at_timestamp, machine_id)
         
         return {'id': machine_pulse_id}, 201
