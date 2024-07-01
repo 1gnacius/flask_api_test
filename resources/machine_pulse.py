@@ -19,21 +19,11 @@ class MachinePulse(Resource):
     def post(self):
         args = parser.parse_args()
         ip = args['ip']
-        executed_at_str = args['executed_at']
+        executed_at = args['executed_at']
         machine_id = args['machine_id']
-        
-        # Convertir executed_at_str a objeto datetime
+        #Guardar la pulsación de la máquina en la base de datos
         try:
-            executed_at_dt = datetime.fromisoformat(executed_at_str)
-        except ValueError:
-            return {'error': 'Invalid date format. Expected ISO 8601 format.'}, 400
-        
-        # Convertir datetime a timestamp (float)
-        executed_at_timestamp = executed_at_dt.timestamp()
-        
-        # Guardar la pulsación de la máquina en la base de datos
-        try:
-            machine_pulse_id = db.execute_machine_pulse(ip, executed_at_timestamp, machine_id)
+            machine_pulse_id = db.execute_machine_pulse(ip, executed_at, machine_id)
             return {'id': machine_pulse_id}, 201
         except Exception as e:
             return {'error': str(e)}, 500

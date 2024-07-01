@@ -6,3 +6,11 @@ DATABASE = {
     'user': os.getenv('DB_USER'),
     'password': os.getenv('DB_PASSWORD')
 }
+
+# DATABASE = {
+#     'host': 'localhost',
+#     'database': 'projectX',
+#     'user': 'postgres',
+#     'password': 'admin',
+#     'port': '5432'
+# }

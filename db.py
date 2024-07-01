@@ -1,5 +1,7 @@
 # db.py
 
+from datetime import datetime
+
 import psycopg2
 
 from config import DATABASE
@@ -40,9 +42,18 @@ def create_item(name, description):
 def execute_machine_pulse(ip, executed_at, machine_id):
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('INSERT INTO machine_pulse (ip, executed_at, machine_id) VALUES (%s, %s, %s) RETURNING id;', (ip, executed_at, machine_id))
-    machine_pulse_id = cur.fetchone()[0]
-    conn.commit()
-    cur.close()
-    conn.close()
+    executed_at_str  = datetime.strptime(executed_at, "%Y-%m-%dT%H:%M:%S.%f")
+    try:
+        cur.execute("INSERT INTO machine_pulse (ip, executed_at, machine_id) VALUES (%s, %s, %s) RETURNING id;", (ip, executed_at_str, machine_id))
+        conn.commit()
+        machine_pulse_id = cur.fetchone()[0]
+        print('Pulse succefully executed.')
+    except psycopg2.Error as e:
+        conn.rollback()
+        print(f'Error executing pulse: {e}')
+        raise
+    finally:
+        cur.close()
+        conn.close()
+    
     return machine_pulse_id
