@@ -26,7 +26,7 @@ class SessionExecution(Resource):
         ip = args['ip']
         executed_at = args['executed_at']
         machine_id = args['machine_id']
-        execution_log = args['session_log']
+        execution_log = args['execution_log']
         execution_log = json_type(execution_log)
         #Guardar la pulsación de la máquina en la base de datos
         try:

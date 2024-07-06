@@ -1,4 +1,4 @@
-CREATE TABLE execution_log (
+CREATE TABLE session_execution (
 	id SERIAL PRIMARY KEY,
     ip VARCHAR,
     executed_at TIMESTAMP,
