@@ -24,6 +24,7 @@ class MachinePulse(Resource):
         #Guardar la pulsación de la máquina en la base de datos
         try:
             machine_pulse_id = db.execute_machine_pulse(ip, executed_at, machine_id)
+            print((ip, executed_at, machine_id))
             return {'id': machine_pulse_id}, 201
         except Exception as e:
             return {'error': str(e)}, 500
