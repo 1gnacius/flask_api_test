@@ -11,7 +11,7 @@ parser = reqparse.RequestParser()
 parser.add_argument('ip', type=str, required=True, help='cannot be blank!')
 parser.add_argument('executed_at', type=str, required=True, help='cannot be blank!')
 parser.add_argument('machine_id', type=int, required=True, help='cannot be blank!')
-parser.add_argument('execution_log', type=dict, required=True, help='cannot be blank!')
+parser.add_argument('execution_log', type=dict, required=False, help='cannot be blank!')
 
 def json_type(value):
     try:
