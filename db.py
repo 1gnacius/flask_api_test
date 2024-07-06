@@ -57,3 +57,23 @@ def execute_machine_pulse(ip, executed_at, machine_id):
         conn.close()
     
     return machine_pulse_id
+
+def execute_session(ip, executed_at, machine_id, execution_log):
+    
+    conn = get_db_connection()
+    cur = conn.cursor()
+    executed_at_str  = datetime.strptime(executed_at, "%Y-%m-%dT%H:%M:%S.%f")
+    try:
+        cur.execute("INSERT INTO session_execution (ip, executed_at, machine_id, execution_log) VALUES (%s, %s, %s, %s) RETURNING id;", (ip, executed_at_str, machine_id, execution_log))
+        conn.commit()
+        session_execution_id = cur.fetchone()[0]
+        print('Pulse succefully executed.')
+    except psycopg2.Error as e:
+        conn.rollback()
+        print(f'Error executing pulse: {e}')
+        raise
+    finally:
+        cur.close()
+        conn.close()
+    
+    return session_execution_id
