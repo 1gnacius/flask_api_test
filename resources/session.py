@@ -15,7 +15,7 @@ parser.add_argument('execution_log', type=str, required=False, help='cannot be b
 
 def json_type(value):
     try:
-        return json.loads(value)
+        return json.dumps(value)
     except ValueError:
         raise ValueError('Invalid JSON')
 
