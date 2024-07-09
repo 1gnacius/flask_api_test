@@ -18,6 +18,9 @@ def json_type(value):
         raise ValueError('Invalid JSON')
 
 class Task(Resource):
+    def get(self):
+        tasks = db.get_all_tasks()
+        return {'tasks': tasks}
 
     def post(self):
         args = parser.parse_args()

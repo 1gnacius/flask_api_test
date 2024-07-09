@@ -59,7 +59,7 @@ def execute_machine_pulse(ip, executed_at, machine_id):
     return machine_pulse_id
 
 def execute_session(ip, executed_at, machine_id, execution_log):
-    
+
     conn = get_db_connection()
     cur = conn.cursor()
     executed_at_str  = datetime.strptime(executed_at, "%Y-%m-%dT%H:%M:%S.%f")
@@ -77,3 +77,31 @@ def execute_session(ip, executed_at, machine_id, execution_log):
         conn.close()
     
     return session_execution_id
+
+def create_task(task_name, task_metadata):
+    
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute("INSERT INTO task (task_name, task_metadata) VALUES (%s, %s) RETURNING id;", (task_name, task_metadata))
+        conn.commit()
+        session_execution_id = cur.fetchone()[0]
+        print('Pulse succefully executed.')
+    except psycopg2.Error as e:
+        conn.rollback()
+        print(f'Error executing pulse: {e}')
+        raise
+    finally:
+        cur.close()
+        conn.close()
+    
+    return session_execution_id
+
+def get_all_tasks():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM task;')
+    tasks = cur.fetchall()
+    cur.close()
+    conn.close()
+    return tasks
