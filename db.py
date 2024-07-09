@@ -100,7 +100,7 @@ def create_task(task_name, task_metadata):
 def get_all_tasks():
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT * FROM task;')
+    cur.execute('SELECT name, task_metadata FROM task;')
     tasks = cur.fetchall()
     cur.close()
     conn.close()
