@@ -17,6 +17,11 @@ def json_type(value):
     except ValueError:
         raise ValueError('Invalid JSON')
 
+class Task(Resource):
+    def get(self, id):
+        task = db.get_task(id)
+        return {'task': task}, 404
+
 class TaskList(Resource):
     def get(self):
         tasks = db.get_all_tasks()

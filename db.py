@@ -106,3 +106,12 @@ def get_all_tasks():
     conn.close()
     print(tasks)
     return tasks
+
+def get_task(id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT name, task_metadata FROM task WHERE id = %s;',(id,))
+    task = cur.fetchone()
+    cur.close()
+    conn.close()
+    return task
