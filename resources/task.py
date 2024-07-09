@@ -8,7 +8,7 @@ from flask_restful import Resource, reqparse
 import db
 
 parser = reqparse.RequestParser()
-parser.add_argument('task_name', type=str, required=True, help='cannot be blank!')
+parser.add_argument('name', type=str, required=True, help='cannot be blank!')
 parser.add_argument('task_metadata', type=str, required=False, help='cannot be blank!')
 
 def json_type(value):
