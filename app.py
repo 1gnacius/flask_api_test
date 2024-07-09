@@ -14,7 +14,7 @@ api = Api(app)
 api.add_resource(ItemList, '/items')
 api.add_resource(MachinePulse, '/machine_pulse')
 api.add_resource(SessionExecution, '/session_execution')
-api.add_resource(SessionExecution, '/task')
+api.add_resource(Task, '/task')
 
 if __name__ == '__main__':
     app.run(debug=True)
