@@ -17,7 +17,7 @@ def json_type(value):
     except ValueError:
         raise ValueError('Invalid JSON')
 
-class Task(Resource):
+class Tasks(Resource):
     def get(self):
         tasks = db.get_all_tasks()
         return {'tasks': tasks}
