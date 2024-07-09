@@ -1,4 +1,4 @@
-# resources/item.py
+# resources/task.py
 
 import json
 from datetime import datetime
