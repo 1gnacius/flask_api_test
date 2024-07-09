@@ -29,7 +29,7 @@ class TaskList(Resource):
         task_metadata = json_type(task_metadata)
         #Guardar la pulsación de la máquina en la base de datos
         try:
-            session_execution_id = db.execute_session(task_name,task_metadata)
+            session_execution_id = db.create_task(task_name,task_metadata)
             print((task_metadata))
             return {'id': session_execution_id}, 201
         except Exception as e:
