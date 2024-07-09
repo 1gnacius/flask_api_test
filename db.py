@@ -104,4 +104,5 @@ def get_all_tasks():
     tasks = cur.fetchall()
     cur.close()
     conn.close()
+    print(tasks)
     return tasks
