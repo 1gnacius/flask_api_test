@@ -20,7 +20,7 @@ def json_type(value):
 class Task(Resource):
     def get(self, id):
         task = db.get_task(id)
-        return {'task': task}, 404
+        return {'task': task}
 
 class TaskList(Resource):
     def get(self):
