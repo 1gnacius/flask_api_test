@@ -19,6 +19,11 @@ def json_type(value):
     except ValueError:
         raise ValueError('Invalid JSON')
 
+class SessionConfig(Resource):
+    def get(self, id):
+        session_config = db.get_session_config(id)
+        return {'session_config': session_config}
+
 class SessionExecution(Resource):
 
     def post(self):

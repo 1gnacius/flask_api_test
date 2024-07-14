@@ -115,3 +115,12 @@ def get_task(id):
     cur.close()
     conn.close()
     return task
+
+def get_session_config(id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT id, session_config FROM session_config WHERE id = %s;',(id,))
+    session_config = cur.fetchone()
+    cur.close()
+    conn.close()
+    return session_config
