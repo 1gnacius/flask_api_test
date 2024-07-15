@@ -15,6 +15,6 @@ def json_type(value):
         raise ValueError('Invalid JSON')
 
 class Sessions(Resource):
-    def get(self, id):
-        sessions = db.get_all_sessions(id)
+    def get(self,):
+        sessions = db.get_all_sessions()
         return {'sessions': sessions}
