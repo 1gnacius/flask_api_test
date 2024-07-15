@@ -124,3 +124,12 @@ def get_session_config(id):
     cur.close()
     conn.close()
     return session_config
+
+def get_all_sessions():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT id, task_metadata FROM session_config')
+    sessions = cur.fetchall()
+    cur.close()
+    conn.close()
+    return sessions
