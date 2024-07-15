@@ -5,7 +5,8 @@ from flask_restful import Api
 
 from resources.item import ItemList
 from resources.machine_pulse import MachinePulse
-from resources.session import SessionConfig, SessionExecution, Sessions
+from resources.session import SessionConfig, SessionExecution
+from resources.sessions import Sessions
 from resources.task import Task, TaskList
 
 app = Flask(__name__)
