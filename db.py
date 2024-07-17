@@ -134,10 +134,10 @@ def get_all_sessions():
     conn.close()
     return sessions
 
-def get_task_schedule(id):
+def get_task_schedule(task_id):
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT task_id, task_schedule FROM task_schedule WHERE task_id = %s;',(id,))
+    cur.execute('SELECT task_id, task_schedule FROM task_schedule WHERE task_id = %s;',(task_id,))
     task_schedule = cur.fetchone()
     cur.close()
     conn.close()
