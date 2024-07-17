@@ -21,6 +21,11 @@ class Task(Resource):
     def get(self, id):
         task = db.get_task(id)
         return {'task': task}
+    
+class TaskSchedule(Resource):
+    def get_task_schedule(self, id):
+        task_schedule = db.get_task_schedule(id)
+        return {'task_schedule': task_schedule}
 
 class TaskList(Resource):
     def get(self):
