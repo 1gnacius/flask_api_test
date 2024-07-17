@@ -10,7 +10,6 @@ import db
 parser = reqparse.RequestParser()
 parser.add_argument('name', type=str, required=True, help='cannot be blank!')
 parser.add_argument('task_metadata', type=str, required=False, help='cannot be blank!')
-parser.add_argument('task_id', type=int, required=True, help='cannot be blank!')
 parser.add_argument('task_schedule', type=str, required=False, help='cannot be blank!')
 
 def json_type(value):
@@ -29,9 +28,9 @@ class TaskSchedule(Resource):
         task_schedule = db.get_task_schedule(task_id)
         return {'task_schedule': task_schedule}
 
-    def post(self):
+    def post(self, task_id):
         args = parser.parse_args()
-        task_id = args['task_id']
+        #task_id = args['task_id']
         task_schedule = args['task_schedule']
         print(task_schedule)
         print(type(task_schedule))
