@@ -10,6 +10,8 @@ import db
 parser = reqparse.RequestParser()
 parser.add_argument('name', type=str, required=True, help='cannot be blank!')
 parser.add_argument('task_metadata', type=str, required=False, help='cannot be blank!')
+parser.add_argument('task_id', type=int, required=True, help='cannot be blank!')
+parser.add_argument('task_schedule', type=str, required=False, help='cannot be blank!')
 
 def json_type(value):
     try:
@@ -26,6 +28,22 @@ class TaskSchedule(Resource):
     def get(self, task_id):
         task_schedule = db.get_task_schedule(task_id)
         return {'task_schedule': task_schedule}
+
+    def post(self):
+        args = parser.parse_args()
+        task_id = args['task_id']
+        task_schedule = args['task_schedule']
+        print(task_schedule)
+        print(type(task_schedule))
+        task_schedule = json_type(task_schedule)
+        print(type(task_schedule))
+        #Guardar la pulsación de la máquina en la base de datos
+        try:
+            task_schedule_id = db.create_task_schedule(task_id, task_schedule)
+            print((task_id, task_schedule))
+            return {'id': task_schedule_id}, 201
+        except Exception as e:
+            return {'error': str(e)}, 500
 
 class TaskList(Resource):
     def get(self):
