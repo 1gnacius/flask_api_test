@@ -148,7 +148,7 @@ def create_task_schedule(task_id, task_schedule):
     conn = get_db_connection()
     cur = conn.cursor()
     try:
-        cur.execute("INSERT INTO task (task_id, task_schedule) VALUES (%s, %s) RETURNING id;", (task_id, task_schedule))
+        cur.execute("INSERT INTO task_schedule (task_id, task_schedule) VALUES (%s, %s) RETURNING id;", (task_id, task_schedule))
         conn.commit()
         task_schedule_id = cur.fetchone()[0]
         print('Pulse succefully executed.')
