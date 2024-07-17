@@ -8,9 +8,8 @@ from flask_restful import Resource, reqparse
 import db
 
 parser = reqparse.RequestParser()
-parser.add_argument('name', type=str, required=True, help='cannot be blank!')
+parser.add_argument('task_id', type=int, required=True, help='cannot be blank!')
 parser.add_argument('task_metadata', type=str, required=False, help='cannot be blank!')
-parser.add_argument('task_schedule', type=str, required=False, help='cannot be blank!')
 
 def json_type(value):
     try:
@@ -18,11 +17,6 @@ def json_type(value):
     except ValueError:
         raise ValueError('Invalid JSON')
 
-class Task(Resource):
-    def get(self, id):
-        task = db.get_task(id)
-        return {'task': task}
-    
 class TaskSchedule(Resource):
     def get(self, task_id):
         task_schedule = db.get_task_schedule(task_id)
@@ -44,7 +38,7 @@ class TaskSchedule(Resource):
         except Exception as e:
             return {'error': str(e)}, 500
 
-class TaskList(Resource):
+class TaskScheduleList(Resource):
     def get(self):
         tasks = db.get_all_tasks()
         return {'tasks': tasks}
