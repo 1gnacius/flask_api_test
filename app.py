@@ -8,7 +8,7 @@ from resources.machine_pulse import MachinePulse
 from resources.session import SessionConfig, SessionExecution
 from resources.sessions import Sessions
 from resources.task import Task, TaskList
-from resources.task_schedule import TaskSchedule
+from resources.task_schedule import CreateTaskSchedule
 
 app = Flask(__name__)
 api = Api(app)
@@ -18,7 +18,7 @@ api.add_resource(MachinePulse, '/machine_pulse')
 api.add_resource(SessionExecution, '/session_execution')
 api.add_resource(SessionConfig, '/session_config/<int:id>')
 api.add_resource(Task, '/task/<int:id>')
-api.add_resource(TaskSchedule, '/task_schedule/')
+api.add_resource(CreateTaskSchedule, '/task_schedule/')
 api.add_resource(TaskList, '/tasks')
 api.add_resource(Sessions, '/sessions')
 

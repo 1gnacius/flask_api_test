@@ -22,6 +22,7 @@ class TaskSchedule(Resource):
         task_schedule = db.get_task_schedule(task_id)
         return {'task_schedule': task_schedule}
 
+class CreateTaskSchedule(Resource):
     def post(self):
         args = parser.parse_args()
         task_id = args['task_id']
