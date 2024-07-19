@@ -9,7 +9,7 @@ import db
 
 parser = reqparse.RequestParser()
 parser.add_argument('task_id', type=int, required=True, help='cannot be blank!')
-parser.add_argument('task_metadata', type=str, required=False, help='cannot be blank!')
+parser.add_argument('task_schedule', type=str, required=False, help='cannot be blank!')
 
 def json_type(value):
     try:
